@@ -1,7 +1,7 @@
-import { test, expect } from "./fixtures/base";
+import { test, expect } from "../../fixtures/base";
 
-test("Приложение успешно рендерится", async ({ loginPage }) => {
-  loginPage.goto();
+test("Разлогин", async ({ loginPage, mainPage }) => {
+  await mainPage.logout();
   await expect(loginPage.usernameInput).toBeVisible();
   await expect(loginPage.passwordInput).toBeVisible();
   await expect(loginPage.signInBtn).toBeVisible();
