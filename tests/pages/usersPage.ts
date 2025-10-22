@@ -13,14 +13,40 @@ export default class UsersPage extends MainPage {
   readonly lastNameInput: Locator;
   readonly saveBtn: Locator;
   readonly showBtn: Locator;
+  readonly table: Locator;
+  readonly headOfTable: Locator;
+  readonly bodyOftable: Locator;
+  readonly userRow: Locator;
+  readonly selectAllCheckbox: Locator;
+  readonly rowCheckbox: Locator;
+  readonly actionsToolbar: Locator;
+  readonly deleteBtn: Locator;
+  readonly createBtnOnEmptyScreen: Locator;
 
   constructor(page: Page) {
     super(page);
+    // Экран создания пользователя
     this.emailInput = page.getByRole("textbox", { name: "Email" });
     this.firstNameInput = page.getByRole("textbox", { name: "First name" });
     this.lastNameInput = page.getByRole("textbox", { name: "Last name" });
     this.saveBtn = page.getByRole("button", { name: "Save" });
     this.showBtn = page.getByRole("link", { name: "Show" });
+
+    // Экран со списком всех польтзователей
+    this.table = page.locator("//table");
+    this.headOfTable = this.table.locator("//thead");
+    this.bodyOftable = this.table.locator("//tbody");
+    this.userRow = this.bodyOftable.locator("//tr");
+    this.selectAllCheckbox = page.getByRole("checkbox", { name: "Select all" });
+    this.rowCheckbox = this.userRow.locator('//*[@type="checkbox"]');
+    this.actionsToolbar = page.locator(
+      '//*[@data-test="bulk-actions-toolbar"]'
+    );
+    this.deleteBtn = this.actionsToolbar.getByRole("button", {
+      name: "Delete",
+    });
+    // Пустой экран пользователей
+    this.createBtnOnEmptyScreen = page.getByRole('link', { name: 'Create' })
   }
 
   /**
