@@ -40,5 +40,5 @@ test("Массовое удаление пользователей", async ({mai
   await usersPage.selectAllCheckbox.check(); 
   await expect(usersPage.actionsToolbar).toBeVisible();
   await usersPage.deleteBtn.click()
-  await expect(usersPage.createBtnOnEmptyScreen).toBeVisible
+  await expect(usersPage.createBtnOnEmptyScreen).toBeVisible()
 })

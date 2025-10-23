@@ -2,11 +2,13 @@ import { test as base } from "@playwright/test";
 import LoginPage from "../pages/loginPage"
 import MainPage from "../pages/mainPage";
 import UsersPage from "../pages/usersPage";
+import StatusesPage from "../pages/statusesPage";
 
 export const test = base.extend<{
   loginPage: LoginPage;
   mainPage: MainPage;
   usersPage: UsersPage;
+  statusesPage: StatusesPage
   autoLogin: boolean
 }>({
   loginPage: async ({ page }, use) => {
@@ -17,6 +19,9 @@ export const test = base.extend<{
   },
   usersPage: async ({ page }, use) => {
     await use(new UsersPage(page));
+  },
+  statusesPage: async ({page}, use) => {
+    await use(new StatusesPage(page));
   },
 
   autoLogin: [
