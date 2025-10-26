@@ -14,20 +14,19 @@ test("Отображение формы создания статуса", async 
   await mainPage.statusesMenuItem.click();
   expect(statusesPage.createBtn).toBeVisible();
   expect(statusesPage.exportBtn).toBeVisible();
-  expect(statusesPage.table).toBeVisible();
-  expect(statusesPage.headOfTable).toBeVisible();
-  expect(statusesPage.bodyOftable).toBeVisible();
-  expect(statusesPage.statusRow).toHaveCount(5);
+  expect(statusesPage.table.headOfTable).toBeVisible();
+  expect(statusesPage.table.bodyOftable).toBeVisible();
+  expect(statusesPage.table.row).toHaveCount(5);
 });
 
 test("Создание нового статуса", async ({ mainPage, statusesPage }) => {
   await mainPage.statusesMenuItem.click();
   await statusesPage.createBtn.click();
-  await statusesPage.nameInput.fill(testStatus.name);
-  await statusesPage.slugInput.fill(testStatus.slug);
-  await statusesPage.saveBtn.click();
+  await statusesPage.form.statusNameInput.fill(testStatus.name);
+  await statusesPage.form.statusSlugInput.fill(testStatus.slug);
+  await statusesPage.form.saveBtn.click();
   await expect(statusesPage.alert).toHaveText("Element created");
-  await statusesPage.showBtn.click();
+  await statusesPage.form.showBtn.click();
   await statusesPage.checkNewStatus(testStatus);
 });
 
@@ -36,29 +35,29 @@ test("Редактирование существующего статуса", a
   statusesPage,
 }) => {
   await mainPage.statusesMenuItem.click();
-  await statusesPage.statusRow.nth(0).click();
-  await statusesPage.nameInput.fill(testStatus.name);
-  await statusesPage.slugInput.fill(testStatus.slug);
-  await statusesPage.saveBtn.click();
+  await statusesPage.table.row.nth(0).click();
+  await statusesPage.form.statusNameInput.fill(testStatus.name);
+  await statusesPage.form.statusSlugInput.fill(testStatus.slug);
+  await statusesPage.form.saveBtn.click();
   await expect(statusesPage.elementUpdatedAlert).toBeVisible();
   await statusesPage.checkStatusInTable(testStatus, rowPosition);
 });
 
 test("Удаление нескольких статусов", async ({ mainPage, statusesPage }) => {
   await mainPage.statusesMenuItem.click();
-  await statusesPage.rowCheckbox.nth(0).check();
-  await statusesPage.rowCheckbox.nth(2).check();
-  await expect(statusesPage.actionsToolbar).toBeVisible();
-  await statusesPage.deleteBtn.click();
+  await statusesPage.table.rowCheckbox.nth(0).check();
+  await statusesPage.table.rowCheckbox.nth(2).check();
+  await expect(statusesPage.table.actionsToolbar.itself).toBeVisible();
+  await statusesPage.table.actionsToolbar.deleteBtn.click();
   await expect(statusesPage.elementsDeletedAlert).toBeVisible();
-  await expect(statusesPage.statusRow).toHaveCount(3);
+  await expect(statusesPage.table.row).toHaveCount(3);
 });
 
 test("Удаление всех статусов", async ({mainPage, statusesPage}) => {
   await mainPage.usersMenuItem.click();
-  await statusesPage.selectAllCheckbox.check(); 
-  await expect(statusesPage.actionsToolbar).toBeVisible();
-  await statusesPage.deleteBtn.click()
+  await statusesPage.table.selectAllCheckbox.check(); 
+  await expect(statusesPage.table.actionsToolbar.itself).toBeVisible();
+  await statusesPage.table.actionsToolbar.deleteBtn.click()
   await expect(statusesPage.createBtnOnEmptyScreen).toBeVisible()
 })
 

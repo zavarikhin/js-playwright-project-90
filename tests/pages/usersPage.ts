@@ -1,5 +1,7 @@
 import { Page, Locator, expect } from "@playwright/test";
-import MainPage from "./mainPage";
+import MainPage from "./basePage";
+import TableWidget from "../widgets/TableWidget";
+import FormWidget from "../widgets/FormWidget";
 
 type User = {
   email: string;
@@ -8,68 +10,30 @@ type User = {
 };
 
 export default class UsersPage extends MainPage {
-  readonly emailInput: Locator;
-  readonly firstNameInput: Locator;
-  readonly lastNameInput: Locator;
-  readonly saveBtn: Locator;
-  readonly showBtn: Locator;
-  readonly table: Locator;
-  readonly headOfTable: Locator;
-  readonly bodyOftable: Locator;
-  readonly userRow: Locator;
-  readonly selectAllCheckbox: Locator;
-  readonly rowCheckbox: Locator;
-  readonly actionsToolbar: Locator;
-  readonly deleteBtn: Locator;
+  readonly form: FormWidget;
+  readonly table: TableWidget;
   readonly createBtnOnEmptyScreen: Locator;
 
   constructor(page: Page) {
     super(page);
-    // Экран создания пользователя
-    this.emailInput = page.getByRole("textbox", { name: "Email" });
-    this.firstNameInput = page.getByRole("textbox", { name: "First name" });
-    this.lastNameInput = page.getByRole("textbox", { name: "Last name" });
-    this.saveBtn = page.getByRole("button", { name: "Save" });
-    this.showBtn = page.getByRole("link", { name: "Show" });
-
-    // Экран со списком всех польтзователей
-    this.table = page.locator("//table");
-    this.headOfTable = this.table.locator("//thead");
-    this.bodyOftable = this.table.locator("//tbody");
-    this.userRow = this.bodyOftable.locator("//tr");
-    this.selectAllCheckbox = page.getByRole("checkbox", { name: "Select all" });
-    this.rowCheckbox = this.userRow.locator('//*[@type="checkbox"]');
-    this.actionsToolbar = page.locator(
-      '//*[@data-test="bulk-actions-toolbar"]'
-    );
-    this.deleteBtn = this.actionsToolbar.getByRole("button", {
-      name: "Delete",
-    });
-    // Пустой экран пользователей
-    this.createBtnOnEmptyScreen = page.getByRole('link', { name: 'Create' })
+    this.form = new FormWidget(page, "//form");
+    this.table = new TableWidget(page, "//table");
+    this.createBtnOnEmptyScreen = page.getByRole("link", { name: "Create" });
   }
 
-  /**
-   * Проверяет, что на странице отображаются данные нового пользователя.
-   *
-   * Метод ищет текстовые элементы с указанными значениями `email`, `firstName` и `lastName`
-   * и ожидает, что они будут видимы на странице.
-   *
-   * @param user Объект пользователя, содержащий email, имя и фамилию.
-   * @param user.email Электронная почта пользователя.
-   * @param user.firstName Имя пользователя.
-   * @param user.lastName Фамилия пользователя.
-   *
-   * @example
-   * await page.checkNewUser({
-   *   email: "user@example.com",
-   *   firstName: "John",
-   *   lastName: "Doe",
-   * });
-   */
   async checkNewUser({ email, firstName, lastName }: User) {
     expect(this.page.getByText(`Email${email}`)).toBeVisible();
     expect(this.page.getByText(`First name${firstName}`)).toBeVisible();
     expect(this.page.getByText(`Last name${lastName}`)).toBeVisible();
+  }
+
+  async checkUserInTable(
+    { email, firstName, lastName }: User,
+    position: number = 0
+  ) {
+    const row = this.table.row.nth(position);
+    expect(row.getByText(`${email}`));
+    expect(row.getByText(`${firstName}`));
+    expect(row.getByText(`${lastName}`));
   }
 }

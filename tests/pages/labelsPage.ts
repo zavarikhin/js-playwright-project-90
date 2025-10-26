@@ -3,12 +3,11 @@ import MainPage from "./basePage";
 import FormWidget from "../widgets/FormWidget";
 import TableWidget from "../widgets/TableWidget";
 
-type TaskStatus = {
+type Label = {
   name: string;
-  slug: string;
 };
 
-export default class StatusesPage extends MainPage {
+export default class LablesPage extends MainPage {
   readonly form: FormWidget;
   readonly table: TableWidget;
   readonly createBtnOnEmptyScreen: Locator;
@@ -20,13 +19,12 @@ export default class StatusesPage extends MainPage {
     this.createBtnOnEmptyScreen = page.getByRole("link", { name: "Create" });
   }
 
-  async checkNewStatus({ name }: TaskStatus) {
+  async checkNewLabel({ name }: Label) {
     expect(this.page.getByText(`Name${name}`)).toBeVisible();
   }
 
-  async checkStatusInTable({ name, slug }: TaskStatus, position: number = 0) {
+  async checkLabelInTable({ name }: Label, position: number = 0) {
     const row = this.table.row.nth(position);
     expect(row.getByText(`${name}`));
-    expect(row.getByText(`${slug}`));
   }
 }

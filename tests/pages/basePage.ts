@@ -12,6 +12,7 @@ export default class MainPage {
   readonly elementUpdatedAlert: Locator;
   readonly elementsDeletedAlert: Locator;
   readonly undo: Locator;
+  readonly labelsMenuItem: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -25,8 +26,11 @@ export default class MainPage {
     });
     this.alert = page.getByRole("alert");
     this.elementUpdatedAlert = page.getByText("Element updatedUndo");
-    this.elementsDeletedAlert = page.getByText('deleted')
+    this.elementsDeletedAlert = page.getByText("deleted");
     this.undo = page.getByRole("button", { name: "Undo" });
+    this.labelsMenuItem = page.getByRole("menuitem", {
+      name: "Labels",
+    });
   }
 
   async logout() {

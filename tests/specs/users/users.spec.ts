@@ -9,12 +9,12 @@ const testUser = {
 test("Cоздание нового пользователя", async ({ mainPage, usersPage }) => {
   await mainPage.usersMenuItem.click();
   await usersPage.createBtn.click();
-  await usersPage.emailInput.fill(testUser.email);
-  await usersPage.firstNameInput.fill(testUser.firstName);
-  await usersPage.lastNameInput.fill(testUser.lastName);
-  await usersPage.saveBtn.click();
+  await usersPage.form.emailInput.fill(testUser.email);
+  await usersPage.form.firstNameInput.fill(testUser.firstName);
+  await usersPage.form.lastNameInput.fill(testUser.lastName);
+  await usersPage.form.saveBtn.click();
   await expect(usersPage.alert).toHaveText("Element created");
-  await usersPage.showBtn.click();
+  await usersPage.form.showBtn.click();
   await usersPage.checkNewUser(testUser);
 });
 
@@ -22,23 +22,23 @@ test("Просмотр списка пользователей", async ({ mainPa
   await mainPage.usersMenuItem.click();
   await expect(usersPage.createBtn).toBeVisible();
   await expect(usersPage.exportBtn).toBeVisible();
-  await expect(usersPage.headOfTable).toBeVisible();
-  await expect(usersPage.bodyOftable).toBeVisible();
-  await expect(usersPage.userRow).toHaveCount(8);
+  await expect(usersPage.table.headOfTable).toBeVisible();
+  await expect(usersPage.table.bodyOftable).toBeVisible();
+  await expect(usersPage.table.row).toHaveCount(8);
 });
 
 test("Удаление пользователя", async ({mainPage, usersPage}) => {
   await mainPage.usersMenuItem.click();
-  await usersPage.rowCheckbox.last().check(); 
-  await expect(usersPage.actionsToolbar).toBeVisible();
-  await usersPage.deleteBtn.click()
-  await expect(usersPage.userRow).toHaveCount(7);
+  await usersPage.table.rowCheckbox.last().check(); 
+  await expect(usersPage.table.actionsToolbar.itself).toBeVisible();
+  await usersPage.table.actionsToolbar.deleteBtn.click()
+  await expect(usersPage.table.row).toHaveCount(7);
 })
 
 test("Массовое удаление пользователей", async ({mainPage, usersPage}) => {
   await mainPage.usersMenuItem.click();
-  await usersPage.selectAllCheckbox.check(); 
-  await expect(usersPage.actionsToolbar).toBeVisible();
-  await usersPage.deleteBtn.click()
+  await usersPage.table.selectAllCheckbox.check(); 
+  await expect(usersPage.table.actionsToolbar.itself).toBeVisible();
+  await usersPage.table.actionsToolbar.deleteBtn.click()
   await expect(usersPage.createBtnOnEmptyScreen).toBeVisible()
 })
