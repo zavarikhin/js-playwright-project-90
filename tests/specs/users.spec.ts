@@ -1,4 +1,4 @@
-import { test, expect } from "../../fixtures/base";
+import { test, expect } from "../fixtures/base";
 
 const testUser = {
   email: "test@test.com",
