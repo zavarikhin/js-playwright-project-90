@@ -6,7 +6,7 @@ const testLabel = {
 
 const rowPosition = 0;
 
-test("Отображение формы создания лейбла", async ({
+test("Отображение списка всех лейблов", async ({
   mainPage,
   labelsPage,
 }) => {

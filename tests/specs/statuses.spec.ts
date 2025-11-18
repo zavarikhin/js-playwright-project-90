@@ -7,7 +7,7 @@ const testStatus = {
 
 const rowPosition = 0;
 
-test("Отображение формы создания статуса", async ({
+test("Отображение списка всех статусов", async ({
   mainPage,
   statusesPage,
 }) => {

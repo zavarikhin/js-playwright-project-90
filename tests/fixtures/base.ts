@@ -4,6 +4,7 @@ import MainPage from "../pages/basePage";
 import UsersPage from "../pages/usersPage";
 import StatusesPage from "../pages/statusesPage";
 import LablesPage from "../pages/labelsPage";
+import TasksPages from "../pages/tasksPage";
 
 export const test = base.extend<{
   loginPage: LoginPage;
@@ -11,6 +12,7 @@ export const test = base.extend<{
   usersPage: UsersPage;
   statusesPage: StatusesPage;
   labelsPage: LablesPage;
+  tasksPage: TasksPages;
   autoLogin: boolean;
 }>({
   loginPage: async ({ page }, use) => {
@@ -27,6 +29,9 @@ export const test = base.extend<{
   },
   labelsPage: async ({ page }, use) => {
     await use(new LablesPage(page));
+  },
+  tasksPage: async ({ page }, use) => {
+    await use(new TasksPages(page));
   },
 
   autoLogin: [

@@ -13,6 +13,7 @@ export default class MainPage {
   readonly elementsDeletedAlert: Locator;
   readonly undo: Locator;
   readonly labelsMenuItem: Locator;
+  readonly tasksMenuItem: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -31,6 +32,7 @@ export default class MainPage {
     this.labelsMenuItem = page.getByRole("menuitem", {
       name: "Labels",
     });
+    this.tasksMenuItem = page.getByRole('menuitem', { name: 'Tasks' })
   }
 
   async logout() {
