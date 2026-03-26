@@ -12,11 +12,11 @@ test("Отображение списка всех статусов", async ({
   statusesPage,
 }) => {
   await mainPage.statusesMenuItem.click();
-  expect(statusesPage.createBtn).toBeVisible();
-  expect(statusesPage.exportBtn).toBeVisible();
-  expect(statusesPage.table.headOfTable).toBeVisible();
-  expect(statusesPage.table.bodyOftable).toBeVisible();
-  expect(statusesPage.table.row).toHaveCount(5);
+  await expect(statusesPage.createBtn).toBeVisible();
+  await expect(statusesPage.exportBtn).toBeVisible();
+  await expect(statusesPage.table.headOfTable).toBeVisible();
+  await expect(statusesPage.table.bodyOftable).toBeVisible();
+  await expect(statusesPage.table.row).toHaveCount(5);
 });
 
 test("Создание нового статуса", async ({ mainPage, statusesPage }) => {

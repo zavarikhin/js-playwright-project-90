@@ -38,7 +38,7 @@ test.describe("Задачи", () => {
   test("Редактирование задачи", async ({ mainPage, tasksPage }) => {
     await mainPage.tasksMenuItem.click();
     const card = tasksPage.getTaskCardByText("Task 13");
-    await card.editBtn.click
+    await card.editBtn.click();
     await tasksPage.fillTaskForm(task);
     await tasksPage.form.saveBtn.click();
     await expect(tasksPage.elementUpdatedAlert).toBeVisible();
@@ -47,11 +47,21 @@ test.describe("Задачи", () => {
     await tasksPage.checkNewTask(task);
   });
 
-  test("Удаление нескольких статусов", async ({ mainPage, labelsPage }) => {
-    await mainPage.labelsMenuItem.click();
+  test("Удаление нескольких статусов", async ({ mainPage, statusesPage }) => {
+    await mainPage.statusesMenuItem.click();
+    await statusesPage.table.rowCheckbox.nth(0).check();
+    await statusesPage.table.rowCheckbox.nth(2).check();
+    await expect(statusesPage.table.actionsToolbar.itself).toBeVisible();
+    await statusesPage.table.actionsToolbar.deleteBtn.click();
+    await expect(statusesPage.elementsDeletedAlert).toBeVisible();
+    await expect(statusesPage.table.row).toHaveCount(3);
   });
 
-  test("Удаление всех статусов", async ({ mainPage, labelsPage }) => {
-    await mainPage.usersMenuItem.click();
+  test("Удаление всех статусов", async ({ mainPage, statusesPage }) => {
+    await mainPage.statusesMenuItem.click();
+    await statusesPage.table.selectAllCheckbox.check();
+    await expect(statusesPage.table.actionsToolbar.itself).toBeVisible();
+    await statusesPage.table.actionsToolbar.deleteBtn.click();
+    await expect(statusesPage.createBtnOnEmptyScreen).toBeVisible();
   });
 });

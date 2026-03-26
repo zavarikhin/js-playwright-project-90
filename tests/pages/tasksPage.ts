@@ -18,12 +18,10 @@ export default class TasksPages extends MainPage {
   readonly contentInput: Locator;
   readonly statusSelection: Locator;
   readonly labelSelection: Locator;
-  readonly taskCard: TaskCardWidget;
 
   constructor(page: Page) {
     super(page);
     this.form = new FormWidget(page, "//form");
-    this.taskCard = new TaskCardWidget(page, "loсator");
     this.assigneeSelection = page.getByRole("combobox", { name: "Assignee" });
     this.titleInput = page.getByRole("textbox", { name: "Title" });
     this.contentInput = page.getByRole("textbox", { name: "Content" });

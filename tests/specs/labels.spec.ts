@@ -11,12 +11,12 @@ test("Отображение списка всех лейблов", async ({
   labelsPage,
 }) => {
   await mainPage.labelsMenuItem.click();
-  expect(labelsPage.createBtn).toBeVisible();
-  expect(labelsPage.exportBtn).toBeVisible();
-  expect(labelsPage.table.itself).toBeVisible();
-  expect(labelsPage.table.headOfTable).toBeVisible();
-  expect(labelsPage.table.bodyOftable).toBeVisible();
-  expect(labelsPage.table.row).toHaveCount(5);
+  await expect(labelsPage.createBtn).toBeVisible();
+  await expect(labelsPage.exportBtn).toBeVisible();
+  await expect(labelsPage.table.itself).toBeVisible();
+  await expect(labelsPage.table.headOfTable).toBeVisible();
+  await expect(labelsPage.table.bodyOftable).toBeVisible();
+  await expect(labelsPage.table.row).toHaveCount(5);
 });
 
 test("Создание нового статуса", async ({ mainPage, labelsPage }) => {

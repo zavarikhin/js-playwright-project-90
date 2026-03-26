@@ -25,6 +25,6 @@ export default class LablesPage extends MainPage {
 
   async checkLabelInTable({ name }: Label, position: number = 0) {
     const row = this.table.row.nth(position);
-    expect(row.getByText(`${name}`));
+    await expect(row.getByText(`${name}`)).toBeVisible();
   }
 }

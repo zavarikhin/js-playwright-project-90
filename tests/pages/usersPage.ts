@@ -22,9 +22,13 @@ export default class UsersPage extends MainPage {
   }
 
   async checkNewUser({ email, firstName, lastName }: User) {
-    expect(this.page.getByText(`Email${email}`)).toBeVisible();
-    expect(this.page.getByText(`First name${firstName}`)).toBeVisible();
-    expect(this.page.getByText(`Last name${lastName}`)).toBeVisible();
+    await expect(this.page.getByText(`Email${email}`)).toBeVisible();
+    await expect(
+      this.page.getByText(`First name${firstName}`)
+    ).toBeVisible();
+    await expect(
+      this.page.getByText(`Last name${lastName}`)
+    ).toBeVisible();
   }
 
   async checkUserInTable(
@@ -32,8 +36,8 @@ export default class UsersPage extends MainPage {
     position: number = 0
   ) {
     const row = this.table.row.nth(position);
-    expect(row.getByText(`${email}`));
-    expect(row.getByText(`${firstName}`));
-    expect(row.getByText(`${lastName}`));
+    await expect(row.getByText(`${email}`)).toBeVisible();
+    await expect(row.getByText(`${firstName}`)).toBeVisible();
+    await expect(row.getByText(`${lastName}`)).toBeVisible();
   }
 }
