@@ -1,5 +1,5 @@
 import { Page, Locator, expect } from "@playwright/test";
-import MainPage from "./basePage";
+import BasePage from "./basePage";
 import FormWidget from "../widgets/FormWidget";
 import TableWidget from "../widgets/TableWidget";
 
@@ -8,7 +8,7 @@ type TaskStatus = {
   slug: string;
 };
 
-export default class StatusesPage extends MainPage {
+export default class StatusesPage extends BasePage {
   readonly form: FormWidget;
   readonly table: TableWidget;
   readonly createBtnOnEmptyScreen: Locator;

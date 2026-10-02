@@ -1,6 +1,6 @@
 import { Page, Locator } from "@playwright/test";
 
-export default class MainPage {
+export default class BasePage {
   readonly page: Page;
   readonly profileBtn: Locator;
   readonly logoutBtn: Locator;

@@ -1,6 +1,6 @@
 import { test as base } from "@playwright/test";
 import LoginPage from "../pages/loginPage";
-import MainPage from "../pages/basePage";
+import BasePage from "../pages/basePage";
 import UsersPage from "../pages/usersPage";
 import StatusesPage from "../pages/statusesPage";
 import LablesPage from "../pages/labelsPage";
@@ -8,7 +8,7 @@ import TasksPages from "../pages/tasksPage";
 
 export const test = base.extend<{
   loginPage: LoginPage;
-  mainPage: MainPage;
+  basePage: BasePage;
   usersPage: UsersPage;
   statusesPage: StatusesPage;
   labelsPage: LablesPage;
@@ -18,8 +18,8 @@ export const test = base.extend<{
   loginPage: async ({ page }, use) => {
     await use(new LoginPage(page));
   },
-  mainPage: async ({ page }, use) => {
-    await use(new MainPage(page));
+  basePage: async ({ page }, use) => {
+    await use(new BasePage(page));
   },
   usersPage: async ({ page }, use) => {
     await use(new UsersPage(page));

@@ -10,8 +10,8 @@ const task = {
 
 test.describe("Задачи", () => {
 
-  test("Отображение формы создания задачи", async ({ mainPage, tasksPage }) => {
-    await mainPage.tasksMenuItem.click();
+  test("Отображение формы создания задачи", async ({ basePage, tasksPage }) => {
+    await basePage.tasksMenuItem.click();
     await tasksPage.createBtn.click();
     await expect(tasksPage.assigneeSelection).toBeVisible();
     await expect(tasksPage.titleInput).toBeVisible();
@@ -21,8 +21,8 @@ test.describe("Задачи", () => {
     await expect(tasksPage.form.saveBtn).toBeVisible();
   });
 
-  test("Создание задачи", async ({ mainPage, tasksPage }) => {
-    await mainPage.tasksMenuItem.click();
+  test("Создание задачи", async ({ basePage, tasksPage }) => {
+    await basePage.tasksMenuItem.click();
     await tasksPage.createBtn.click();
     await tasksPage.fillTaskForm(task);
     await tasksPage.form.saveBtn.click();
@@ -35,8 +35,8 @@ test.describe("Задачи", () => {
     await tasksPage.checkNewTask(task);
   });
 
-  test("Редактирование задачи", async ({ mainPage, tasksPage }) => {
-    await mainPage.tasksMenuItem.click();
+  test("Редактирование задачи", async ({ basePage, tasksPage }) => {
+    await basePage.tasksMenuItem.click();
     const card = tasksPage.getTaskCardByText("Task 13");
     await card.editBtn.click();
     await tasksPage.fillTaskForm(task);
@@ -47,8 +47,8 @@ test.describe("Задачи", () => {
     await tasksPage.checkNewTask(task);
   });
 
-  test("Удаление нескольких статусов", async ({ mainPage, statusesPage }) => {
-    await mainPage.statusesMenuItem.click();
+  test("Удаление нескольких статусов", async ({ basePage, statusesPage }) => {
+    await basePage.statusesMenuItem.click();
     await statusesPage.table.rowCheckbox.nth(0).check();
     await statusesPage.table.rowCheckbox.nth(2).check();
     await expect(statusesPage.table.actionsToolbar.itself).toBeVisible();
@@ -57,8 +57,8 @@ test.describe("Задачи", () => {
     await expect(statusesPage.table.row).toHaveCount(3);
   });
 
-  test("Удаление всех статусов", async ({ mainPage, statusesPage }) => {
-    await mainPage.statusesMenuItem.click();
+  test("Удаление всех статусов", async ({ basePage, statusesPage }) => {
+    await basePage.statusesMenuItem.click();
     await statusesPage.table.selectAllCheckbox.check();
     await expect(statusesPage.table.actionsToolbar.itself).toBeVisible();
     await statusesPage.table.actionsToolbar.deleteBtn.click();

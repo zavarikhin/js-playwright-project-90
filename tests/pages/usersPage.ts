@@ -1,5 +1,5 @@
 import { Page, Locator, expect } from "@playwright/test";
-import MainPage from "./basePage";
+import BasePage from "./basePage";
 import TableWidget from "../widgets/TableWidget";
 import FormWidget from "../widgets/FormWidget";
 
@@ -9,7 +9,7 @@ type User = {
   lastName: string;
 };
 
-export default class UsersPage extends MainPage {
+export default class UsersPage extends BasePage {
   readonly form: FormWidget;
   readonly table: TableWidget;
   readonly createBtnOnEmptyScreen: Locator;

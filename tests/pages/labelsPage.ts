@@ -1,5 +1,5 @@
 import { Page, Locator, expect } from "@playwright/test";
-import MainPage from "./basePage";
+import BasePage from "./basePage";
 import FormWidget from "../widgets/FormWidget";
 import TableWidget from "../widgets/TableWidget";
 
@@ -7,7 +7,7 @@ type Label = {
   name: string;
 };
 
-export default class LablesPage extends MainPage {
+export default class LablesPage extends BasePage {
   readonly form: FormWidget;
   readonly table: TableWidget;
   readonly createBtnOnEmptyScreen: Locator;

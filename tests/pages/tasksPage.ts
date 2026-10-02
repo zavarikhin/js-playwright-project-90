@@ -1,5 +1,5 @@
 import { Page, Locator, expect } from "@playwright/test";
-import MainPage from "./basePage";
+import BasePage from "./basePage";
 import FormWidget from "../widgets/FormWidget";
 import TaskCardWidget from "../widgets/TaskCardWidget";
 
@@ -11,7 +11,7 @@ export type Task = {
   label: string;
 };
 
-export default class TasksPages extends MainPage {
+export default class TasksPages extends BasePage {
   readonly form: FormWidget;
   readonly assigneeSelection: Locator;
   readonly titleInput: Locator;
